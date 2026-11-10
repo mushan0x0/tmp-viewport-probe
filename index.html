@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<style>
+  html,body{margin:0;background:#111;color:#fff;font:12px/1.45 -apple-system,monospace}
+  .row{height:18px;border-bottom:1px solid #333}
+</style></head>
+<body>
+<div id="out" class="row" style="height:auto;padding:4px;white-space:pre-wrap"></div>
+<script>
+const lines = [];
+const push = (k,v) => lines.push(k+': '+v);
+push('innerW x innerH', innerWidth+' x '+innerHeight);
+push('documentElement.clientHeight', document.documentElement.clientHeight);
+push('body.clientHeight', document.body.clientHeight);
+push('visualViewport', 'h='+visualViewport.height.toFixed(1)+' offsetTop='+visualViewport.offsetTop.toFixed(1)+' pageTop='+visualViewport.pageTop.toFixed(1));
+push('scrollY', scrollY);
+const probe = (css) => { const d=document.createElement('div'); d.style.cssText='position:absolute;visibility:hidden;'+css; document.body.appendChild(d); const h=d.getBoundingClientRect().height; d.remove(); return h.toFixed(1); };
+push('100dvh', probe('height:100dvh'));
+push('100vh', probe('height:100vh'));
+push('100svh', probe('height:100svh'));
+push('100lvh', probe('height:100lvh'));
+push('100% of body', probe('height:100%'));
+push('env(safe-area-inset-top)', probe('height:env(safe-area-inset-top)'));
+push('env(safe-area-inset-bottom)', probe('height:env(safe-area-inset-bottom)'));
+const de = document.documentElement.getBoundingClientRect();
+push('html box', 'top='+de.top+' h='+de.height);
+const b = document.body.getBoundingClientRect();
+push('body box', 'top='+b.top+' h='+b.height);
+const d2 = document.createElement('div'); d2.style.cssText='height:100%;background:#333'; document.body.appendChild(d2);
+const r2 = d2.getBoundingClientRect(); push('child height:100%', 'top='+r2.top+' h='+r2.height);
+document.getElementById('out').textContent = lines.join('\n');
+</script>
+</body></html>
