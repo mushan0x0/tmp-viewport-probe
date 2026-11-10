@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<style>
+ html,body{margin:0;background:#111;color:#fff;font:14px monospace}
+ #fTop{position:fixed;top:0;left:0;right:0;height:200px;background:#f00;z-index:9}
+ #fBot{position:fixed;bottom:0;left:0;right:0;height:200px;background:#0f0;z-index:9}
+ #flow{height:300px;background:#222;position:relative;z-index:1}
+ #out{position:relative;z-index:20;padding:8px;background:#000}
+</style></head>
+<body>
+<div id="fTop"></div><div id="fBot"></div>
+<div id="flow"></div>
+<div id="out">…</div>
+<script>
+const r = s => { const b=document.querySelector(s).getBoundingClientRect(); return s+': top='+b.top.toFixed(1)+' h='+b.height.toFixed(1)+' bottom='+b.bottom.toFixed(1); };
+document.getElementById('out').textContent = ['innerH='+innerHeight, r('#fTop'), r('#fBot'), 'scrollY='+scrollY].join('\n');
+</script>
+</body></html>
