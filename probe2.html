@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+<style>
+ html,body{margin:0;background:#111;color:#fff;font:12px/1.4 -apple-system,monospace}
+ #fixedTop{position:fixed;top:0;left:0;right:0;height:120px;background:rgba(255,0,0,.55);z-index:9}
+ #fixedFull{position:fixed;top:0;left:0;right:0;height:100vh;background:rgba(0,0,255,.35);z-index:8}
+ #absInFixed{position:absolute;top:0;left:0;right:0;height:60px;background:rgba(0,255,0,.5);z-index:10}
+ #flow{height:400px;background:#222}
+ #out{position:relative;z-index:20;padding:6px;white-space:pre-wrap}
+</style></head>
+<body>
+<div id="fixedFull"></div>
+<div id="fixedTop"></div>
+<div id="absInFixed"></div>
+<div id="flow"></div>
+<div id="out"></div>
+<script>
+const r = s => { const e=document.querySelector(s); const b=e.getBoundingClientRect(); return s+': top='+b.top.toFixed(1)+' h='+b.height.toFixed(1)+' bottom='+b.bottom.toFixed(1); };
+const lines=[ 'innerH='+innerHeight, r('#fixedFull'), r('#fixedTop'), r('#absInFixed'), r('#flow'), 'scrollY='+scrollY ];
+document.getElementById('out').textContent=lines.join('\n');
+</script>
+</body></html>
